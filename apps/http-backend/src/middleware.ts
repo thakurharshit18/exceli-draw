@@ -1,3 +1,4 @@
+import { JWT_SECRET } from "@repo/backend-common/config";
 import { NextFunction,Request,Response } from "express";
 import jwt from "jsonwebtoken";
 
@@ -13,7 +14,7 @@ if(!token){
 }
    
 try {
-    const decoded = jwt.verify(token,process.env.JWT_SECRET as string) as jwtPayload;
+    const decoded = jwt.verify(token,JWT_SECRET) as jwtPayload;
     (req as any).user = decoded;
     next();
 } catch (error) {
